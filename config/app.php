@@ -168,6 +168,7 @@ return [
          */
         Laravel\Tinker\TinkerServiceProvider::class,
 
+        Encore\Admin\Providers\AdminServiceProvider::class,
         /*
          * Application Service Providers...
          */
