@@ -1,0 +1,62 @@
+// Core variables and mixins
+@import "../variables";
+@import "../mixins";
+
+
+.topbar{
+	position: relative;
+	z-index: 3;
+	height:50px;
+	line-height:50px;
+	color:$font-base;
+	font-size:12px;
+	font-weight:400;
+	overflow:hidden;
+//  width:expression(document.body.clientWidth <= 1000? "1000px": "auto");
+//width:expression_r(document.body.clientWidth <= 1200? "1200px": "auto");
+
+	p{
+		margin: 0;
+	}
+	a{
+		color:#000;
+	}
+	.links{
+		li{
+			display: inline-block;
+			margin-left: 24px;
+		}
+	}
+}
+
+.header{
+	position: relative;
+	z-index: 3;
+	height:90px;
+	width:100%;
+	background:transparent;
+	.logo{
+		width:180px;
+		height: 80px;
+		img{
+			width: 100%;
+		}
+
+	}
+	.links{
+		// line-height: 80px;
+		li{
+			display:inline-block;
+			&.active{
+				border-bottom: 2px solid red;
+			}
+		}
+		a{
+			display: block;
+			padding:30px 15px  10px 15px;
+			font-weight: 400;
+			color: #000;
+			font-family: $font-family-sans-serif;
+		}
+	}
+}
