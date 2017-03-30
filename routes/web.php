@@ -14,6 +14,18 @@
 Route::get('/', function () {
     return view('index');
 });
+Route::get('/cmw', function () {
+    return view('cmw');
+});
+Route::get('/gzw', function () {
+    return view('gzw');
+});
+Route::get('/dsw', function () {
+    return view('dsw');
+});
+Route::get('/wzd', function () {
+    return view('wzd');
+});
 
 Auth::routes();
 
