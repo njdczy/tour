@@ -11,5 +11,6 @@ Route::group([
 ], function (Router $router) {
 
     $router->get('/', 'HomeController@index');
-
+    //微信请求回调
+    $router->any('/wechat', 'WechatController@serve');
 });

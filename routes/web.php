@@ -30,3 +30,5 @@ Route::get('/wzd', function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index');
+
+Route::any('/wechat', 'WechatController@serve');
