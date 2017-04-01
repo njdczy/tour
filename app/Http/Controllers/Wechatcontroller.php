@@ -15,6 +15,9 @@ class Wechatcontroller extends Controller
 
         $wechat = app('wechat');
 
+        $wechat->setMessageHandler(function ($message) {
+            return "您好！欢迎关注成会玩!";
+        });
         return $wechat->server->serve();
     }
 }
