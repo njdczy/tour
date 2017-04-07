@@ -120,4 +120,7 @@ return [
      * Version displayed in footer.
      */
     'version'   => '1.0',
+
+    //extends
+    'avatar_default'=>'https://gss0.baidu.com/9vo3dSag_xI4khGko9WTAnF6hhy/zhidao/pic/item/4ec2d5628535e5dd8efd8d6974c6a7efcf1b62b6.jpg'
 ];

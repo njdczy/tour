@@ -18,7 +18,7 @@ use Encore\Admin\Widgets\Table;
 use Encore\Admin\Widgets\Tab;
 
 use Illuminate\Pagination\LengthAwarePaginator;
-class Newscontroller extends Wechatcontroller
+class Newscontroller extends WechatController
 {
     public function __construct()
     {

@@ -4,7 +4,7 @@ namespace App\Admin\Controllers;
 
 
 
-class Piccontroller extends Wechatcontroller
+class Piccontroller extends WechatController
 {
     public function __construct()
     {

@@ -32,3 +32,15 @@ Auth::routes();
 Route::get('/home', 'HomeController@index');
 
 Route::any('/wechat', 'WechatController@serve');
+
+
+
+Route::group([
+    'prefix'        => 'flow',
+    'middleware'    => ['scopes'],
+],function () {
+    Route::get('/', 'FlowController@index');
+});
+
+Route::get('/mobile', 'MobileController@index')->name('mobile');
+Route::get('/oauth', 'OauthController@index')->name('oauth');

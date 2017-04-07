@@ -4,7 +4,7 @@ namespace App\Admin\Controllers;
 
 use App\Http\Controllers\Controller;
 
-class Wechatcontroller extends Controller
+class WechatController extends Controller
 {
     protected $wechat;
 
