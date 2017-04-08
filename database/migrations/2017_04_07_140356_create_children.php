@@ -16,10 +16,10 @@ class CreateChildren extends Migration
         Schema::create('children', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name');
-            $table->string('height');
-            $table->string('weight');
-            $table->string('card');
-            $table->string('school');
+            $table->string('height')->nullable();
+            $table->string('weight')->nullable();
+            $table->string('card')->nullable();
+            $table->string('school')->nullable();
             $table->integer('user_id');
             $table->timestamps();
         });

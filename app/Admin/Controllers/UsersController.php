@@ -56,9 +56,13 @@ class UsersController extends Controller
             $grid->column('child_base', '小朋友基本信息')->display(function () {
                 $child = Child::where('user_id', '=', $this->id)->first();
                 if ($child) {
-                    $sex =  check::getSex($child->card) == 1 ? '男' : '女';
+                    $sex = isset($child->card)?check::getSex($child->card) == 1 ? '男' : '女' :'未知';
+                    $age = '';
+                    if ($child->card) {
+                        $birth = check::getDate($child->card);
+                        $age=  date('Y',time())-substr($birth,0,4);
+                    }
 
-                    $age=  date('Y',time())-substr(check::getDate($child->card),0,4);
                     return "<p> ".$child->name."（".$sex." ，" .$age . "岁）</p>
                             <p>$child->height m/$child->weight kg</p>
                             ";
@@ -109,6 +113,7 @@ class UsersController extends Controller
 
             $form->text('real_name', '真实姓名');
             $form->text('phone_number', '手机号');
+            $form->text('children.name','孩子名字');
         });
     }
 
