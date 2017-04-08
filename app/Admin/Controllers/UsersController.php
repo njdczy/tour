@@ -42,11 +42,11 @@ class UsersController extends Controller
 
             $grid->column('wx_mix', '微信基本信息')->display(function () {
 
-                $sex = $this->sex == 1 ? '男' : '女';
+                $sex = isset($this->sex)?$this->sex == 1 ? '男' : '女' :'未知';
 
                 return "<p>$this->wx_nickname (" . $sex . ")</p>
                            <p><span>关注时间:</span>$this->created_at</p>                          
-                           <p style='max-width: 40px'><span>备注:$this->remark</span></p>";
+                           <p style='max-width: 40px'><span>备注: $this->remark</span></p>";
             });
             //后期信息
             $grid->column('wx_id', '微信ID')->editable();
@@ -55,21 +55,22 @@ class UsersController extends Controller
 
             $grid->column('child_base', '小朋友基本信息')->display(function () {
                 $child = Child::where('user_id', '=', $this->id)->first();
+                if ($child) {
+                    $sex =  check::getSex($child->card) == 1 ? '男' : '女';
 
-                $sex =  check::getSex($child->card) == 1 ? '男' : '女';
-
-                $age=  date('Y',time())-substr(check::getDate($child->card),0,4);
-
-                return "<p> ".$child->name."（".$sex." ，" .$age . "岁）</p>
+                    $age=  date('Y',time())-substr(check::getDate($child->card),0,4);
+                    return "<p> ".$child->name."（".$sex." ，" .$age . "岁）</p>
                             <p>$child->height m/$child->weight kg</p>
                             ";
+                }
             });
             $grid->column('child_details', '小朋友详细信息')->display(function () {
                 $child = Child::where('user_id', '=', $this->id)->first();
-
-                return "<p><span>身份证:</span>$child->card</p>
+                if ($child) {
+                    return "<p><span>身份证:</span>$child->card</p>
                            <p><span>学校:</span>$child->school</p>
                           ";
+                }
             });
             $grid->column('more', '家长信息')->display(function () {
                 return "<p><span>$this->real_name:</span>$this->phone_number</p>                    
@@ -81,13 +82,14 @@ class UsersController extends Controller
 
                 $latest_order = Order::where('user_id','=',$this->id)->latest()
                     ->first();
-                return "                                               
+                if ($latest_order) {
+                    return "                                               
                             <p>$latest_order->trip_name</p>                          
                             ";
+                }
             });
 
             //表格显示控制
-            $grid->disableCreation();
             $grid->filter(function ($filter) {
                 $filter->disableIdFilter();// 禁用id查询框
                 $filter->like('name', '名称');
@@ -118,6 +120,22 @@ class UsersController extends Controller
             $content->description('修改');
 
             $content->body($this->form()->edit($id));
+        });
+    }
+
+    /**
+     * Create interface.
+     *
+     * @return Content
+     */
+    public function create()
+    {
+        return Admin::content(function (Content $content) {
+
+            $content->header('用户管理');
+            $content->description('新增用户');
+
+            $content->body($this->form());
         });
     }
 

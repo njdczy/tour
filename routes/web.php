@@ -42,5 +42,5 @@ Route::group([
     Route::get('/', 'FlowController@index');
 });
 
-Route::get('/mobile', 'MobileController@index')->name('mobile');
+//Route::get('/mobile', 'MobileController@index')->name('mobile');
 Route::get('/oauth', 'OauthController@index')->name('oauth');

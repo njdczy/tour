@@ -36,7 +36,7 @@ class TripsController extends Controller
             //表格扩展
             $grid->actions(function ($actions) {
 
-                $actions->prepend('<a href='.url("admin/triplists").'><i class="fa fa-eye"></i></a>');
+                $actions->prepend('<a href='.url("admin/triplists/".$actions->getKey()).'><i class="fa fa-eye"></i></a>');
 
             });
 

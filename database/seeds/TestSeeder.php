@@ -47,6 +47,8 @@ class TestSeeder extends Seeder
         ]);
         $triplist_id = TripList::insertGetId([
             'times'    => "第一期",
+            'date_start'    => "2017-04-06 00:00:00",
+            'date_end'    => "2017-04-08 00:00:00",
             'trip_id' => $trip_id,
         ]);
         Order::insertGetId([
