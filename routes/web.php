@@ -33,7 +33,14 @@ Route::get('/home', 'HomeController@index');
 
 Route::any('/wechat', 'WechatController@serve');
 
+Route::get('form/{id}', 'FromController@index');
 
+//Route::group([
+//    'prefix'        => 'form',
+//    'middleware'    => ['scopes'],
+//],function () {
+//    Route::get('/{id}', 'FromController@index');
+//});
 
 Route::group([
     'prefix'        => 'flow',
