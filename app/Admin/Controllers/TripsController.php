@@ -10,6 +10,7 @@ use Encore\Admin\Grid;
 use Encore\Admin\Facades\Admin;
 use Encore\Admin\Layout\Content;
 
+use App\Admin\Extensions\TripLists;
 use Encore\Admin\Controllers\ModelForm;
 
 use App\Trip;
@@ -36,8 +37,9 @@ class TripsController extends Controller
             //表格扩展
             $grid->actions(function ($actions) {
 
-                $actions->prepend('<a href='.url("admin/triplists/".$actions->getKey()).'><i class="fa fa-eye"></i></a>');
+                $actions->prepend(new TripLists($actions->getKey()));
 
+                //$actions->prepend('<a href='.url("admin/triplists/".$actions->getKey()).'><i class="fa fa-eye"></i></a>');
             });
 
             $grid->filter(function ($filter) {
