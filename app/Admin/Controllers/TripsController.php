@@ -27,6 +27,7 @@ class TripsController extends Controller
             $content->description('活动列表');
 
             $content->body($this->grid());
+
         });
     }
 
@@ -39,12 +40,13 @@ class TripsController extends Controller
 
                 $actions->prepend(new TripLists($actions->getKey()));
 
-                //$actions->prepend('<a href='.url("admin/triplists/".$actions->getKey()).'><i class="fa fa-eye"></i></a>');
+                $actions->prepend('<a href='.url("admin/triplists/".$actions->getKey()."/create").'><i class="fa fa-plus"></i></a>');
             });
 
             $grid->filter(function ($filter) {
                 $filter->disableIdFilter();// 禁用id查询框
             });
+
         });
     }
 

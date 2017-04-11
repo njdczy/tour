@@ -22,6 +22,7 @@
                     </div>
                 </div>
                 <div class="modal-footer">
+
                     <button type="submit" class="btn btn-primary submit">{{ trans('admin::lang.submit') }}</button>
                 </div>
             </form>

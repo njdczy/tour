@@ -17,9 +17,13 @@ class CreateOrders extends Migration
             $table->increments('id');
             $table->integer('trip_id');
             $table->string('trip_name');
-            $table->integer('triplist_id');
+            $table->string('triplist_id');
+            $table->string('triplist_name');
             $table->integer('user_id');
-            $table->integer('child_id');
+            $table->string('user_name');
+            $table->text('child_info');
+            $table->unsignedTinyInteger('is_payed');
+            $table->decimal('total',10,2);
             $table->timestamps();
         });
     }

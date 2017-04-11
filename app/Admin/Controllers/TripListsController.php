@@ -3,51 +3,21 @@
 namespace App\Admin\Controllers;
 
 use Illuminate\Http\Request;
+use Input;
 use App\Http\Controllers\Controller;
 
 use Encore\Admin\Form;
-use Encore\Admin\Grid;
 use Encore\Admin\Facades\Admin;
 use Encore\Admin\Layout\Content;
 
 use Encore\Admin\Controllers\ModelForm;
 
 use App\TripList;
+use App\Trip;
 
 class TripListsController extends Controller
 {
     use ModelForm;
-
-    public function index($tid)
-    {
-        return Admin::content(function (Content $content) use ($tid) {
-            $content->header('期数管理');
-            $content->description('期数列表');
-
-            $content->body($this->grid($tid));
-        });
-    }
-
-    protected function grid($tid)
-    {
-        return Admin::grid(TripList::class, function (Grid $grid) use ($tid) {
-            $grid->model()->where('trip_id','=',$tid);
-            $grid->times('期数');
-            $grid->column('date','时间')->display(function () {
-                return $this->date_start.'-'.$this->date_end;
-            });
-            //表格扩展
-            $grid->actions(function ($actions) {
-
-                $actions->prepend('<a href='.url("admin/picture/".$actions->getKey()).'><i class="fa fa-eye"></i></a>');
-
-            });
-
-            $grid->filter(function ($filter) {
-                $filter->disableIdFilter();// 禁用id查询框
-            });
-        });
-    }
 
     protected function form($tid)
     {
@@ -71,9 +41,10 @@ class TripListsController extends Controller
     public function edit($tid,$id)
     {
         return Admin::content(function (Content $content) use ($tid,$id) {
+            $tripname = Trip::find($tid);
 
-            $content->header('期数管理');
-            $content->description('修改期数');
+            $content->header($tripname->name);
+            $content->description('修改');
 
             $content->body($this->form($tid)->edit($id));
         });
@@ -82,8 +53,8 @@ class TripListsController extends Controller
     public function create($tid)
     {
         return Admin::content(function (Content $content) use ($tid) {
-
-            $content->header('期数管理');
+            $tripname = Trip::findOrFail($tid);
+            $content->header($tripname->name);
             $content->description('新增期数');
 
             $content->body($this->form($tid));

@@ -170,6 +170,7 @@ return [
 
         Encore\Admin\Providers\AdminServiceProvider::class,
         Overtrue\LaravelWechat\ServiceProvider::class,
+        Barryvdh\Debugbar\ServiceProvider::class,
         /*
          * Application Service Providers...
          */

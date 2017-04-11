@@ -41,6 +41,15 @@ class TestSeeder extends Seeder
             'school'  => '南大附小',
             'user_id' => $user_id,
         ]);
+        $child_id2 = Child::insertGetId([
+            'name'    => '狗蛋2',
+            'height'  => '1.00',
+            'weight'  => '30',
+            'card'    => '320882199303278889',
+            'school'  => '南大附小',
+            'user_id' => $user_id,
+            'is_default' => 0,
+        ]);
 
         $trip_id = Trip::insertGetId([
             'name'    => '2017王牌特工精品来袭',
@@ -53,10 +62,15 @@ class TestSeeder extends Seeder
         ]);
         Order::insertGetId([
             'trip_id'    => $trip_id,
-            'trip_name'    => "2017王牌特工精品来袭(第一期)",
+            'trip_name'    => "2017王牌特工精品来袭",
             'triplist_id' => $triplist_id,
+            'triplist_name' => "第一期",
             'user_id' => $user_id,
-            'child_id' => $child_id,
+            'user_name' => '卞铮',
+            'is_payed' => 1,
+            'total' => 100.00,
+            'child_info' => '',
+            'created_at'    => "2017-04-06 00:00:00",
         ]);
     }
 }

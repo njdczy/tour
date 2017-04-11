@@ -21,6 +21,7 @@ class CreateChildren extends Migration
             $table->string('card')->nullable();
             $table->string('school')->nullable();
             $table->integer('user_id');
+            $table->unsignedTinyInteger('is_default')->default(1);
             $table->timestamps();
         });
     }

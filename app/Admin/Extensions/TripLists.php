@@ -17,11 +17,18 @@ class TripLists
     protected function script()
     {
         return <<<SCRIPT
+        
+         var value = document.getElementById("form-control-select").value;
 
-$('.submit').on('click', function () {
+$('.edit').on('click', function () {
     
-    // Your code.
-   location.href = document.getElementById("form-control-select").value;
+   location.href = '/admin/triplists/$this->id/'+value+'/edit';
+    
+});
+
+$('.order').on('click', function () {
+    
+    location.href = '/admin/order/$this->id/'+value;
     
 });
 
@@ -33,9 +40,9 @@ SCRIPT;
         Admin::script($this->script());
 
         $selectarr = TripList::where('trip_id','=',$this->id)->pluck('times', 'id')->toArray();
-        $select_html = '<option value="'.url("admin/triplists/$this->id/create").'">新增期数</option>';
+        $select_html = '';
         foreach ($selectarr as $key => $val) {
-            $select_html .=  '<option value="'.url("admin/triplists/$this->id/$key/edit").'">'.$val.'</option>';
+            $select_html .=  '<option value="'.$key.'">'.$val.'</option>';
         }
         return '
 <a data-toggle="modal" data-target="#triplists-modal" data-id="{$this->id}"><i class="fa fa-eye"></i></a>
@@ -64,7 +71,9 @@ SCRIPT;
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="submit" class="btn btn-primary submit">' . trans("admin::lang.submit") .'</button>
+                  
+                        <button type="edit" class="btn btn-primary edit pull-left" >修改信息</button>
+                        <button type="order" class="btn btn-primary order ">查看订单</button>
 
                     </div>
               

@@ -54,7 +54,7 @@ class UsersController extends Controller
 
 
             $grid->column('child_base', '小朋友基本信息')->display(function () {
-                $child = Child::where('user_id', '=', $this->id)->first();
+                $child = Child::where('is_default', 1)->where('user_id', '=', $this->id)->first();
                 if ($child) {
                     $sex = isset($child->card)?check::getSex($child->card) == 1 ? '男' : '女' :'未知';
                     $age = '';
@@ -69,7 +69,7 @@ class UsersController extends Controller
                 }
             });
             $grid->column('child_details', '小朋友详细信息')->display(function () {
-                $child = Child::where('user_id', '=', $this->id)->first();
+                $child = Child::where('is_default', 1)->where('user_id', '=', $this->id)->first();
                 if ($child) {
                     return "<p><span>身份证:</span>$child->card</p>
                            <p><span>学校:</span>$child->school</p>
@@ -113,7 +113,11 @@ class UsersController extends Controller
 
             $form->text('real_name', '真实姓名');
             $form->text('phone_number', '手机号');
-            $form->text('children.name','孩子名字');
+            //$form->text('children.name','孩子名字');
+            $form->hasMany('children', function (Form\NestedForm $form) {
+                $form->text('name','孩子名字');
+
+            });
         });
     }
 

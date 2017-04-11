@@ -17,4 +17,9 @@ class TripList extends Model
     {
         return json_decode($pictures, true);
     }
+
+    public function trip()
+    {
+        return $this->belongsTo('App\Trip');
+    }
 }
