@@ -10,16 +10,27 @@
 		<title>报名表</title>
 	</head>
 	<body>
+    <div class="weui-toptips weui-toptips_warn js_tooltips"  @if (count($errors) > 0)style="display: block;" @else style="display: none;"  @endif>
+        @if (count($errors) > 0)
+            <div class="alert alert-danger">
+                <ul>
+                   <li>{{ $errors->first()}}</li>
+                </ul>
+            </div>
+        @endif
+    </div>
 		<div class="container">
 			<p class="head-title">{{$trip->name}}—报名表</p>
 			<p class="subtitle">请认真填写表单</p>
+
+            <form method="post" action="/form/{{ $trip->id }}"  name="person">
 			<div class="adds"> 
 				<h3 class="Info">小朋友信息<span class="nums">(1)</span></h3>
 				<div class="weui-cells__title">小朋友姓名 <span> *</span></div>
 				<div class="weui-cells">
 		            <div class="weui-cell">
 		                <div class="weui-cell__bd">
-		                    <input class="weui-input" type="text" placeholder="小朋友姓名" value="" name="inputChild">
+		                    <input class="weui-input" type="text" placeholder="小朋友姓名" value="" name="inputChild[]">
 		                </div>
 		           	</div>
 	        	</div>
@@ -27,7 +38,7 @@
 				<div class="weui-cells">
 		            <div class="weui-cell">
 		                <div class="weui-cell__bd">
-		                    <input class="weui-input" type="text" placeholder="证件号码" value=""  name="inputID">
+		                    <input class="weui-input" type="text" placeholder="证件号码" value=""  name="inputID[]">
 		                </div>
 		           	</div>
 	        	</div>
@@ -35,7 +46,7 @@
 				<div class="weui-cells">
 		            <div class="weui-cell">
 		                <div class="weui-cell__bd">
-		                    <input class="weui-input" type="text" placeholder="身高" value=""  name="inputHeight">
+		                    <input class="weui-input" type="text" placeholder="身高" value=""  name="inputHeight[]">
 		                </div>
 		           	</div>
 	        	</div>
@@ -43,7 +54,7 @@
 				<div class="weui-cells">
 		            <div class="weui-cell">
 		                <div class="weui-cell__bd">
-		                    <input class="weui-input" type="text" placeholder="体重" value="" name="inputWeight">
+		                    <input class="weui-input" type="text" placeholder="体重" value="" name="inputWeight[]">
 		                </div>
 		           	</div>
 	        	</div>
@@ -51,7 +62,7 @@
 				<div class="weui-cells">
 		            <div class="weui-cell">
 		                <div class="weui-cell__bd">
-		                    <input class="weui-input" type="text" placeholder="所在学校" value="" name="inputSchool">
+		                    <input class="weui-input" type="text" placeholder="所在学校" value="" name="inputSchool[]">
 		                </div>
 		           	</div>
 	        	</div>
@@ -86,23 +97,23 @@
 	                </div>
 	           	</div>
         	</div>
-        	<div class="weui-cells__title">联系邮箱<span> *</span></div>
+        	<div class="weui-cells__title">联系邮箱</div>
 			<div class="weui-cells">
 	            <div class="weui-cell">
 	                <div class="weui-cell__bd">
-	                    <input class="weui-input" type="text" placeholder="联系邮箱" value="" name=" inputEmail">
+	                    <input class="weui-input" type="text" placeholder="联系邮箱" value="" name="inputEmail">
 	                </div>
 	           	</div>
         	</div>
-        	<div class="weui-cells__title">微信ID（开营前5天建立微信群<span> *</span></div>
+        	<div class="weui-cells__title">微信ID（开营前5天建立微信群</div>
 			<div class="weui-cells">
 	            <div class="weui-cell">
 	                <div class="weui-cell__bd">
-	                    <input class="weui-input" type="text" placeholder="微信ID" value="" name=" inputWechat">
+	                    <input class="weui-input" type="text" placeholder="微信ID" value="" name="inputWechat">
 	                </div>
 	           	</div>
         	</div>
-        	<div class="weui-cells__title">家长特殊嘱咐<span> *</span></div>
+        	<div class="weui-cells__title">家长特殊嘱咐</div>
 			<div class="weui-cells">
 	            <div class="weui-cell">
 	                <div class="weui-cell__bd">
@@ -187,28 +198,29 @@
 	            </label>
         	</div>
         	<div class="page__bd page__bd_spacing">
-        		<a href="javascript:;" class="weui-btn weui-btn_primary">提交</a>
+        		<button type="submit"  class="weui-btn weui-btn_primary">提交</button>
         	</div>
-        	
+                {{ csrf_field() }}
+            </form>
 		</div>
 		
 	</body>
 	<script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
 	<script type="text/javascript">
-		
+     
 		function createEles(){
 			var index = $('.adds').prev().index();
 			index++;
 			var html="<h3 class='Info'>小朋友信息("+index+")</h3>"+'<div class="weui-cells__title">小朋友姓名 <span> *</span></div>'+
-	            '<div class="weui-cells"><div class="weui-cell"><div class="weui-cell__bd"><input class="weui-input" type="text" placeholder="小朋友姓名" value="" name="inputChild"></div></div></div>'
+	            '<div class="weui-cells"><div class="weui-cell"><div class="weui-cell__bd"><input class="weui-input" type="text" placeholder="小朋友姓名" value="" name="inputChild[]"></div></div></div>'
 	            +'<div class="weui-cells__title">证件号码 <span> *</span></div>'+
-	            '<div class="weui-cells"><div class="weui-cell"><div class="weui-cell__bd"><input class="weui-input" type="text" placeholder="证件号码" value="" name="inputID"></div></div></div>'
+	            '<div class="weui-cells"><div class="weui-cell"><div class="weui-cell__bd"><input class="weui-input" type="text" placeholder="证件号码" value="" name="inputID[]"></div></div></div>'
 	            +'<div class="weui-cells__title">身高<span> *</span></div>'+
-	            '<div class="weui-cells"><div class="weui-cell"><div class="weui-cell__bd"><input class="weui-input" type="text" placeholder="身高" value="" name="inputHeight"></div></div></div>'
+	            '<div class="weui-cells"><div class="weui-cell"><div class="weui-cell__bd"><input class="weui-input" type="text" placeholder="身高" value="" name="inputHeight[]"></div></div></div>'
 	            +'<div class="weui-cells__title">体重（kg）<span> *</span></div>'+
-	            '<div class="weui-cells"><div class="weui-cell"><div class="weui-cell__bd"><input class="weui-input" type="text" placeholder="体重" value="" name="inputWeight"></div></div></div>'
+	            '<div class="weui-cells"><div class="weui-cell"><div class="weui-cell__bd"><input class="weui-input" type="text" placeholder="体重" value="" name="inputWeight[]"></div></div></div>'
 	            +'<div class="weui-cells__title">所在学校<span> *</span></div>'+
-	            '<div class="weui-cells"><div class="weui-cell"><div class="weui-cell__bd"><input class="weui-input" type="text" placeholder="所在学校" value="" name="inputSchool"></div></div></div>'
+	            '<div class="weui-cells"><div class="weui-cell"><div class="weui-cell__bd"><input class="weui-input" type="text" placeholder="所在学校" value="" name="inputSchool[]"></div></div></div>'
 	            ;
 			var Adds = document.createElement('div');
 			Adds.className = 'adds';	

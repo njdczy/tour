@@ -34,7 +34,7 @@ Route::get('/home', 'HomeController@index');
 Route::any('/wechat', 'WechatController@serve');
 
 Route::get('form/{id}', 'FromController@index');
-
+Route::post('form/{id}', 'FromController@store');
 //Route::group([
 //    'prefix'        => 'form',
 //    'middleware'    => ['scopes'],
