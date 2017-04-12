@@ -243,6 +243,9 @@
 			}
 				
 		});
-
+		var warn = $(".weui-toptips_warn");
+		if(warn.css("display") == 'block'){
+			warn.fadeOut(3000);
+		}
 	</script>
 </html>
