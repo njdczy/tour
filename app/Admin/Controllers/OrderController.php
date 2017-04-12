@@ -35,7 +35,7 @@ class OrderController extends Controller
             });
             $grid->user_name('下单人');
             $grid->created_at('下单时间');
-            $grid->column('details','订单详细信息');
+            $grid->details('订单详细信息');
             $grid->is_payed('是否付款')->display(function ($is_payed) {
                 return $is_payed ? '是': '否';
             });

@@ -30,6 +30,7 @@ class CreateUsersTable extends Migration
             $table->string('openid')->nullable()->comment('openid')->index();
             $table->string('unionid')->nullable()->comment('unionid');
             $table->string('wx_nickname')->nullable()->comment('昵称');
+            $table->string('wx_id')->nullable()->comment('wx_id');
             $table->string('avatar')->nullable()->comment('头像');
             $table->string('sex')->nullable()->comment('性别');
             $table->string('city')->nullable()->comment('城市');

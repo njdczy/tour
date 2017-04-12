@@ -31,7 +31,7 @@ class FormRequest extends Ori
             'inputSchool.*' => 'required',
             'inputParent' => 'required',
             'inputTel'    => 'required',
-            'inputAdress' => 'required',
+            'inputAddress' => 'required',
         ];
     }
 

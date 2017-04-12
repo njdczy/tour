@@ -22,7 +22,7 @@ class CreateOrders extends Migration
             $table->integer('user_id');
             $table->string('user_name');
             $table->text('child_info');
-            $table->unsignedTinyInteger('is_payed');
+            $table->unsignedTinyInteger('is_payed')->default(0);
             $table->decimal('total',10,2);
             $table->timestamps();
         });

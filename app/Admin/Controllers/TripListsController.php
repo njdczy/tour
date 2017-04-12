@@ -9,6 +9,7 @@ use App\Http\Controllers\Controller;
 use Encore\Admin\Form;
 use Encore\Admin\Facades\Admin;
 use Encore\Admin\Layout\Content;
+use Encore\Admin\Grid;
 
 use Encore\Admin\Controllers\ModelForm;
 
@@ -18,6 +19,32 @@ use App\Trip;
 class TripListsController extends Controller
 {
     use ModelForm;
+
+    public function index($tid)
+    {
+        return Admin::content(function (Content $content) use ($tid)  {
+
+            $content->header('期数管理');
+            $content->description('期数列表');
+
+            $content->body($this->grid($tid));
+
+        });
+    }
+
+    protected function grid($tid)
+    {
+        return Admin::grid(TripList::class, function (Grid $grid) use ($tid) {
+            $grid->model()->where('trip_id','=',$tid);
+            $grid->times('期数');
+
+
+            $grid->filter(function ($filter) {
+                $filter->disableIdFilter();// 禁用id查询框
+            });
+
+        });
+    }
 
     protected function form($tid)
     {
