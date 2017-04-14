@@ -27,6 +27,10 @@ Route::get('/wzd', function () {
     return view('wzd');
 });
 
+Route::get('/pyq', function () {
+    return view('wechat.pyq');
+});
+
 Auth::routes();
 
 Route::get('/home', 'HomeController@index');
