@@ -1,4 +1,4 @@
-<h3 class="Info">家长信息</h3>
+<h3 class="Info patriarch">家长信息</h3>
 <div class="weui-cells__title">家长姓名<span> *</span></div>
 <div class="weui-cells">
     <div class="weui-cell">
