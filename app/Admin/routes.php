@@ -31,6 +31,6 @@ Route::group([
     Route::post('/picture/{tlid}', 'PictureController@store');
     Route::delete('/picture/{tlid}/{id}', 'PictureController@destroy');
 
-    Route::get('/order/{tlid}/{id}', 'OrderController@index');
+    Route::get('/order/{tid}/{tlid}', 'OrderController@index');
 
 });

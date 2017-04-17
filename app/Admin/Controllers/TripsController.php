@@ -35,6 +35,8 @@ class TripsController extends Controller
     {
         return Admin::grid(Trip::class, function (Grid $grid) {
             $grid->name('活动名称');
+            $grid->price('活动单价')->editable();
+            $grid->price_bed('床位单价')->editable();
             //表格扩展
             $grid->actions(function ($actions) {
 
@@ -56,7 +58,8 @@ class TripsController extends Controller
         return Admin::form(Trip::class, function (Form $form) {
 
             $form->text('name', '活动名称');
-
+            $form->text('price', '活动单价');
+            $form->text('price_bed', '床位单价');
         });
     }
 

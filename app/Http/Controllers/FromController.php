@@ -16,7 +16,8 @@ use App\Order;
 
 class FromController extends Controller
 {
-    public function index($id)
+
+    public function index($id,Request $request)
     {
         $trip = Trip::findOrFail($id);
         $trip_lists = TripList::where('trip_id', $trip->id)
@@ -27,22 +28,20 @@ class FromController extends Controller
             $trip_list->date_start = Carbon::parse($trip_list->date_start);;
             $trip_list->date_end = Carbon::parse($trip_list->date_end);;
         });
-
         return view("wechat.form.form", compact('trip', 'trip_lists'));
     }
 
 
-    public function store($id, FormRequest $request)
+    public function store(FormRequest $request)
     {
         //children
-        //$child_ids = $request->input('child_id.*');
         $inputChilds = $request->input('inputChild.*');
         $inputIDs = $request->input('inputID.*');
         $inputHeights = $request->input('inputHeight.*');
         $inputWeights = $request->input('inputWeight.*');
         $inputSchools = $request->input('inputSchool.*');
 
-        $is_bed = $request->input('is_bed');
+        $is_bed = $request->input('is_bed',0);
 
         foreach ($inputChilds as $key => $value) {
             $child = Child::firstOrNew(['card' => $inputIDs[$key]]);
@@ -51,62 +50,50 @@ class FromController extends Controller
             $child->height = $inputHeights[$key];
             $child->weight = $inputWeights[$key];
             $child->school = $inputSchools[$key];
-            $child->user_id = 1;
+            $child->user_id = session('user_id');
 
-            //$child->save();
+            $child->save();
             $child_arr[$key] =  $child->toArray();
             $child_arr[$key]['is_bed'] = $is_bed;
         }
 
-//        if ($child_ids) {
-//            foreach ($child_ids as $key => $value) {
-//                $child = Child::findOrFail($value);
-//                $child->name = $inputChilds[$key];
-//                $child->card = $inputIDs[$key];
-//                $child->height = $inputHeights[$key];
-//                $child->weight = $inputWeights[$key];
-//                $child->school = $inputSchools[$key];
-//                $child->save();
-//            }
-//        } else {
-//            foreach ($inputChilds as $key => $value) {
-//
-//                $child = new Child;
-//                $child->name = $inputChilds[$key];
-//                $child->card = $inputIDs[$key];
-//                $child->height = $inputHeights[$key];
-//                $child->weight = $inputWeights[$key];
-//                $child->school = $inputSchools[$key];
-//                $child->user_id = \Auth::id();
-//                $child->save();
-//            }
-//        }
-
         //user
-        $user = User::findOrFail(1);
+        $user = User::findOrFail(session('user_id'));
         $user->name = $user->real_name = $request->input('inputParent');
         $user->phone_number = $request->input('inputTel');
         $user->address = $request->input('inputAddress');
         $user->email = $request->input('inputEmail');
-        //$user->save();
+        $user->save();
 
         //order
-        $trip_list = TripList::findOrFail($id);
+        $trip_list = TripList::findOrFail($request->input('Date'));
         $trip = Trip::findOrFail($trip_list->trip_id);
         $order = new Order;
 
+
+        $order->enjoin =  $request->input('inputEnjoin');
+        $order->is_bed =  $is_bed;
+
         $order->trip_id = $trip->id;
         $order->trip_name = $trip->name;
-        $order->triplist_id = $id;
+        $order->triplist_id = $trip_list->id;
         $order->triplist_name = $trip_list->times;
 
-        $order->user_id = 1;
+        $order->user_id = session('user_id');
         $order->user_name = $user->name;
 
         $order->child_info = serialize($child_arr);
+        if ($is_bed) {
+            $unit_price = $trip->price + $trip->price_bed;
+        }else {
+            $unit_price = $trip->price;
+        }
+        $order->need_total = $unit_price * count($inputIDs);
         $order->total = 0.00;
 
         $order->save();
+        session(['order_id' => $order->id]);
+        return redirect('/pay');
     }
 
 }

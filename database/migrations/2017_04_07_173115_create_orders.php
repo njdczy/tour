@@ -23,7 +23,10 @@ class CreateOrders extends Migration
             $table->string('user_name');
             $table->text('child_info');
             $table->unsignedTinyInteger('is_payed')->default(0);
-            $table->decimal('total',10,2);
+            $table->decimal('need_total',10,2);
+            $table->decimal('total',10,2)->default(0.00);
+            $table->string('enjoin')->nullable();
+            $table->unsignedTinyInteger('is_bed')->default(0);
             $table->timestamps();
         });
     }

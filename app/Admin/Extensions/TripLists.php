@@ -19,17 +19,19 @@ class TripLists
         return <<<SCRIPT
         
          var select = document.getElementById("form-control-select");
-         var index = select.selectedIndex; // 选中索引
-         var value = select.options[index].value;
+       
+       
+         
 $('.edit').on('click', function () {
-
-
+  var index = select.selectedIndex; // 选中索引
+  var value = select.options[index].value;
    location.href = '/admin/triplists/$this->id/'+value+'/edit';
     
 });
 
 $('.order').on('click', function () {
-    
+      var index = select.selectedIndex; // 选中索引
+  var value = select.options[index].value;
     location.href = '/admin/order/$this->id/'+value;
     
 });

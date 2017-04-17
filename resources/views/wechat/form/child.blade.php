@@ -1,6 +1,6 @@
 @if (isset($children) && $children)
     @foreach($children as $key => $child)
-        <h3 class="Info">小朋友信息<span class="nums">(<span>1</span>)</span></h3>
+        <h3 class="Info">小朋友信息<span class="nums">(1)</span></h3>
         <div class="weui-cells__title">小朋友姓名 <span> *</span></div>
         <div class="weui-cells">
             <div class="weui-cell">
@@ -41,10 +41,9 @@
                 </div>
             </div>
         </div>
-        <input type="hidden" value="{{$child->id}}" name="child_id[]">
     @endforeach
 @else
-    <h3 class="Info">小朋友信息<span class="nums">(<span>1</span>)</span></h3>
+    <h3 class="Info">小朋友信息<span class="nums">(1)</span></h3>
     <div class="weui-cells__title">小朋友姓名 <span> *</span></div>
     <div class="weui-cells">
         <div class="weui-cell">
