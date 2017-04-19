@@ -17,3 +17,6 @@
         </label>
     @endforeach
 </div>
+<div class="page__bd page__bd_spacing next_parent">
+     <a href="javascript:;" class="weui-btn weui-btn_primary">下一步</a>
+</div>
