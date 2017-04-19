@@ -53,24 +53,34 @@ class TestSeeder extends Seeder
 
         $trip_id = Trip::insertGetId([
             'name'    => '2017王牌特工精品来袭',
+            'price'    => 100.00,
+            'price_bed'    => 20.00,
         ]);
         $triplist_id = TripList::insertGetId([
             'times'    => "第一期",
-            'date_start'    => "2017-04-06 00:00:00",
-            'date_end'    => "2017-04-08 00:00:00",
+            'date_start'    => "2017-04-15 00:00:00",
+            'date_end'    => "2017-04-16 00:00:00",
+            'trip_id' => $trip_id,
+        ]);
+        $triplist_id = TripList::insertGetId([
+            'times'    => "第二期",
+            'date_start'    => "2017-04-16 00:00:00",
+            'date_end'    => "2017-04-17 00:00:00",
             'trip_id' => $trip_id,
         ]);
         Order::insertGetId([
             'trip_id'    => $trip_id,
             'trip_name'    => "2017王牌特工精品来袭",
             'triplist_id' => $triplist_id,
-            'triplist_name' => "第一期",
+            'triplist_name' => "第二期",
             'user_id' => $user_id,
             'user_name' => '卞铮',
             'is_payed' => 1,
-            'total' => 100.00,
+            'is_bed' => 1,
+            'need_total' => 120.00,
+            'total' => 120.00,
             'child_info' => '',
-            'created_at'    => "2017-04-06 00:00:00",
+            'created_at'    => "2017-04-16 00:00:00",
         ]);
     }
 }
