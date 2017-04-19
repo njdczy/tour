@@ -2,6 +2,7 @@
 .container{
 	overflow: auto;
 }
+
 /*index style*/
 .head-title{
 	text-align: center;
@@ -12,8 +13,39 @@
 	text-align: center;
 	font-size: 16px;
 }
+.step{
+	font-size: 0;
+	text-align: center;
+}
+.step li{
+	display: inline-block;
+	list-style: none;
+	width: 30%;
+	height: 14px;
+	font-size: 14px;
+	text-align: center;
+	color: black;
+	background:#e3e3e3 ;
+	border-radius:10px ;
+}
+.step li i{
+	font-style: normal;
+	display: block;
+}
+.step .on{
+	background: #1AAD19;
+	border-radius:10px ;
+	transition: all .5s ease-in;
+}
+.box{
+	display: none;
+}
+.active{
+	display: block;
+}
 .Info{
 	margin-top: 5%;
+	margin-bottom: 5%;
 	text-align: center;
 }
 span{
@@ -37,7 +69,7 @@ span{
 	text-align: left;
 }
 .Btns{
-	margin: 5% 2% 5% 0;
+	margin: 3% 4% 5% 0;
 	text-align:right;
 }
 .reduce{
@@ -103,4 +135,9 @@ article p{
 	width: 95px;
 	height: 95px;
 	border-radius: 10px;
+}
+.cells{
+	width: auto;
+	text-align: inherit;
+	padding: 10px 15px;
 }
