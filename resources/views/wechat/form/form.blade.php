@@ -18,10 +18,10 @@
         <li class="step_one on">
             <i></i>
         </li>
-        <li class="step_two">
+        <li class="progress">
             <i></i>
         </li>
-        <li class="step_three">
+        <li class="progress">
             <i></i>
         </li>
     </ul>
@@ -50,25 +50,22 @@
 <script type="text/javascript">
         var next = document.getElementsByClassName('next');
         var box = document.getElementsByClassName('box');
+        var progress = document.getElementsByClassName('progress');
         for (var i= 0; i < next.length;i++) {
             next[i].index = i;
             next[i].onclick=function(){
                 for (var j = 0;j <next.length;j++ ) {
+                    progress[j].className='progress';
                     box[j].className='box';
                 }
+                if(this.index == 0 || this.index==1){
+                    $('.step_one').removeClass('on');
+                    $('.time').css('display','none');
+                }
                 box[this.index].className='box active';
+                progress[this.index].className='progress on';
             }
         }
-        $('.next_one').on('click',function(){
-            $('.time').css('display','none');
-            $('.step_one').removeClass('on');
-            $('.step_two').addClass('on');
-        })
-        $('.next_two').on('click',function(){
-            $('.step_one').removeClass('on');
-            $('.step_two').removeClass('on');
-            $('.step_three').addClass('on');
-        })
         var _index = 1;
         function createEles(i){
             var html = $('.adds').html();
