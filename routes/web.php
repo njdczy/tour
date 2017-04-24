@@ -27,31 +27,30 @@ Route::get('/wzd', function () {
     return view('wzd');
 });
 
-Route::get('/pyq', function () {
-    return view('wechat.pyq');
-});
 
-Auth::routes();
 
-Route::get('/home', 'HomeController@index');
 
 Route::any('/wechat', 'WechatController@serve');
 
-Route::get('form/{id}', 'FromController@index');
-Route::post('form/{id}', 'FromController@store');
-//Route::group([
-//    'prefix'        => 'form',
-//    'middleware'    => ['scopes'],
-//],function () {
-//    Route::get('/{id}', 'FromController@index');
-//});
 
 Route::group([
-    'prefix'        => 'flow',
     'middleware'    => ['scopes'],
 ],function () {
-    Route::get('/', 'FlowController@index');
+    Route::get('form/{id}', 'FromController@index');
+    Route::post('form/{id}', 'FromController@store');
+    Route::get('/pyq', function () {
+        return view('wechat.pyq');
+    });
+    Route::get('/pay', 'PayController@index')->name('pay');
+
 });
+
+//Route::group([
+//    'prefix'        => 'flow',
+//    'middleware'    => ['scopes'],
+//],function () {
+//    Route::get('/', 'FlowController@index');
+//});
 
 //Route::get('/mobile', 'MobileController@index')->name('mobile');
 Route::get('/oauth', 'OauthController@index')->name('oauth');

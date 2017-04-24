@@ -32,8 +32,8 @@ class PayController extends Controller
         if ($result->return_code == 'SUCCESS' && $result->result_code == 'SUCCESS'){
             $prepayId = $result->prepay_id;
         }
-        $json = $wechat->payment->configForPayment($prepayId); // 返回 json 字符串，如果想返回数组，传第二个参数 false
-        dd($json);
-        return view("wechat.pay", compact('json'));
+        $config = $wechat->payment->configForPayment($prepayId); // 返回 json 字符串，如果想返回数组，传第二个参数 false
+        //$config = $wechat->payment->configForJSSDKPayment($prepayId); // 返回数组
+        return view("wechat.pay", ['pay' => $config]);
     }
 }
