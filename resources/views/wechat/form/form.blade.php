@@ -58,6 +58,14 @@
                     progress[j].className='progress';
                     box[j].className='box';
                 }
+//                switch (this.index){
+//                    case 0:
+//                        console.log(this.index);
+//                        break;
+//                    case 1:
+//                        console.log(this.index);
+//                        break;
+//                }
                 if(this.index == 0 || this.index==1){
                     $('.step_one').removeClass('on');
                     $('.time').css('display','none');

@@ -16,6 +16,9 @@ Route::group([
     Route::resources([
         'trips'  => 'TripsController',
     ]);
+    Route::resources([
+        'menu'  => 'MenuController',
+    ]);
 
     Route::get('/triplists/{tid}', 'TripListsController@index');
     Route::get('/triplists/{tid}/create', 'TripListsController@create');

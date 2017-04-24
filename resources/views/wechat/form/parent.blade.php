@@ -29,7 +29,7 @@
             <label class="weui-label">联系邮箱</label>
         </div>
         <div class="weui-cell__bd">
-            <input class="weui-input" type="text" placeholder="联系邮箱" value="" name="inputEmail">
+            <input class="weui-input" type="text" placeholder="联系邮箱" value="{{ old('inputEmail') }}" name="inputEmail">
         </div>
     </div>
     <div class="weui-cell cells">
@@ -37,7 +37,7 @@
             <label class="weui-label">家长特殊嘱咐</label>
         </div>
         <div class="weui-cell__bd">
-            <input class="weui-input" type="text" placeholder="家长特殊嘱咐" value="" name="inputEnjoin">
+            <input class="weui-input" type="text" placeholder="家长特殊嘱咐" value="{{ old('inputEnjoin') }}" name="inputEnjoin">
         </div>
     </div>
     <div class="weui-cell cells"></div>

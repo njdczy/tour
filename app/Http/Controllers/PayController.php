@@ -29,12 +29,11 @@ class PayController extends Controller
         ];
         $order = new Order($attributes);
         $result = $wechat->payment->prepare($order);
-        dump($result);
         if ($result->return_code == 'SUCCESS' && $result->result_code == 'SUCCESS'){
             $prepayId = $result->prepay_id;
         }
-        dump($prepayId);
         $json = $wechat->payment->configForPayment($prepayId); // 返回 json 字符串，如果想返回数组，传第二个参数 false
         dd($json);
+        return view("wechat.pay", compact('json'));
     }
 }
