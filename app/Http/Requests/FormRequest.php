@@ -28,10 +28,10 @@ class FormRequest extends Ori
             'inputID.*'     => 'identitycards',
             'inputHeight.*' => 'required',
             'inputWeight.*' => 'required',
-            'inputSchool.*' => 'required',
+//            'inputSchool.*' => 'required',
             'inputParent' => 'required',
             'inputTel'    => 'required',
-            'inputAddress' => 'required',
+//            'inputAddress' => 'required',
         ];
     }
 
@@ -42,12 +42,12 @@ class FormRequest extends Ori
             'inputID.*.identitycards'  => '身份证格式错误',
             'inputHeight.*.required'  => '请输入小孩身高',
             'inputWeight.*.required'  => '请输入小孩体重',
-            'inputSchool.*.required'  => '请输入学校名称',
+//            'inputSchool.*.required'  => '请输入学校名称',
 
 
             'inputParent.required'  => '请家长姓名',
             'inputTel.required'  => '请输入手机',
-            'inputAdress.required'  => '请输入家庭住址',
+//            'inputAdress.required'  => '请输入家庭住址',
 
         ];
     }

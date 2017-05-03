@@ -16,22 +16,22 @@
             <input class="weui-input" type="text" placeholder="家长手机" value="{{ old('inputTel') }}" name="inputTel">
         </div>
     </div>
-    <div class="weui-cell cells">
-        <div class="weui-cell__hd">
-            <label class="weui-label">家庭住址<span> *</span></label>
-        </div>
-        <div class="weui-cell__bd">
-            <input class="weui-input" type="text" placeholder="家庭住址" value="{{ old('inputAddress') }}" name="inputAddress">
-        </div>
-    </div>
-    <div class="weui-cell cells">
-        <div class="weui-cell__hd">
-            <label class="weui-label">联系邮箱</label>
-        </div>
-        <div class="weui-cell__bd">
-            <input class="weui-input" type="text" placeholder="联系邮箱" value="{{ old('inputEmail') }}" name="inputEmail">
-        </div>
-    </div>
+    {{--<div class="weui-cell cells">--}}
+        {{--<div class="weui-cell__hd">--}}
+            {{--<label class="weui-label">家庭住址<span> *</span></label>--}}
+        {{--</div>--}}
+        {{--<div class="weui-cell__bd">--}}
+            {{--<input class="weui-input" type="text" placeholder="家庭住址" value="{{ old('inputAddress') }}" name="inputAddress">--}}
+        {{--</div>--}}
+    {{--</div>--}}
+    {{--<div class="weui-cell cells">--}}
+        {{--<div class="weui-cell__hd">--}}
+            {{--<label class="weui-label">联系邮箱</label>--}}
+        {{--</div>--}}
+        {{--<div class="weui-cell__bd">--}}
+            {{--<input class="weui-input" type="text" placeholder="联系邮箱" value="{{ old('inputEmail') }}" name="inputEmail">--}}
+        {{--</div>--}}
+    {{--</div>--}}
     <div class="weui-cell cells">
         <div class="weui-cell__hd">
             <label class="weui-label">家长特殊嘱咐</label>
