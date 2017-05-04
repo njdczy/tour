@@ -17,7 +17,7 @@
     function jsApiCall() {
         WeixinJSBridge.invoke("getBrandWCPayRequest", {!! $pay !!}, function (res) {
             if (res.err_msg == "get_brand_wcpay_request:ok") {
-                alert('支付成功');
+                location.href = "/pay/ok";
             } else if (res.err_msg == 'get_brand_wcpay_request:fail'){
                 alert('支付失败');
             }

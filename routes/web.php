@@ -43,6 +43,10 @@ Route::group([
     });
     Route::get('/pay', 'PayController@index')->name('pay');
 
+    Route::get('/pay/ok',function (){
+        return view('wechat.msg');
+    });
+
 });
 
 //Route::group([
