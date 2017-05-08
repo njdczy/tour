@@ -37,7 +37,15 @@ class TripsController extends Controller
         return Admin::grid(Trip::class, function (Grid $grid) {
             $grid->name('活动名称');
             $grid->column('qrcode','报名二维码')->display(function () {
-                return  '<img src="data:image/png;base64,' .base64_encode(QrCode::format("png")->size(100)->generate(url("/form/".$this->id))) .'"/>';
+                return  '<img src="data:image/png;base64,'
+                .base64_encode(
+                    QrCode::format("png")
+                        ->merge(asset('images/logo/logo.png'), .28,true)
+                        ->errorCorrection('H')
+                        ->size(150)
+                        ->generate(url("/form/".$this->id))
+                )
+                .'"/>';
             });
             $grid->price('活动单价')->editable();
             $grid->price_bed('床位单价')->editable();
