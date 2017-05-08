@@ -170,6 +170,7 @@ return [
 
         Encore\Admin\Providers\AdminServiceProvider::class,
         Overtrue\LaravelWechat\ServiceProvider::class,
+        SimpleSoftwareIO\QrCode\QrCodeServiceProvider::class,
         //Barryvdh\Debugbar\ServiceProvider::class,
         /*
          * Application Service Providers...
@@ -230,6 +231,7 @@ return [
         'View' => Illuminate\Support\Facades\View::class,
 
         'EasyWeChat' => Overtrue\LaravelWechat\Facade::class,
+        'QrCode' => SimpleSoftwareIO\QrCode\Facades\QrCode::class,
     ],
 
 ];
