@@ -1,4 +1,5 @@
 @include('wechat.layouts.header')
+<p style="text-align: center;">{{$trip->name}}—报名表</p>
 <button type="submit" class="weui-btn weui-btn_primary" onclick="callpay()">微信支付</button>
 <script type="text/javascript">
     {{--function callpay() {--}}
