@@ -1,5 +1,8 @@
 @include('wechat.layouts.header')
-<h2 class="weui-msg__title" style="margin-top: 249px;margin-bottom: 79px;text-align: center;">信息提交成功</h2>
+<div class="weui-msg">
+    <div class="weui-msg__icon-area"><i class="weui-icon-success weui-icon_msg"></i></div>
+    <h2 class="weui-msg__title">信息提交成功</h2>
+</div>
 <button type="submit" class="weui-btn weui-btn_primary" onclick="callpay()">微信支付</button>
 <script type="text/javascript">
     {{--function callpay() {--}}
