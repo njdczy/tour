@@ -33,6 +33,7 @@ class UsersController extends Controller
     protected function grid()
     {
         return Admin::grid(User::class, function (Grid $grid) {
+            $grid->model()->orderBy('id', 'desc');
             //微信原始信息
             $grid->avatar('头像')->display(function ($avatar) {
 
@@ -110,12 +111,12 @@ class UsersController extends Controller
     protected function form()
     {
         return Admin::form(User::class, function (Form $form) {
-
+            $form->hidden('id');
             $form->text('real_name', '真实姓名');
             $form->text('phone_number', '手机号');
-            //$form->text('children.name','孩子名字');
             $form->hasMany('children', function (Form\NestedForm $form) {
                 $form->text('name','孩子名字');
+                $form->text('card','身份证');
 
             });
         });
