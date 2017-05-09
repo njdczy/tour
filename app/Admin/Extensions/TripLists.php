@@ -17,21 +17,17 @@ class TripLists
     protected function script()
     {
         return <<<SCRIPT
-        
-         var select = document.getElementById("form-control-select"+$this->id);
-       
-       
-         
+
 $('.edit'+$this->id).on('click', function () {
-  var index = select.selectedIndex; // 选中索引
-  var value = select.options[index].value;
+  var index = document.getElementById("form-control-select"+$this->id).selectedIndex; // 选中索引
+  var value = document.getElementById("form-control-select"+$this->id).options[index].value;
    location.href = '/admin/triplists/$this->id/'+value+'/edit';
     
 });
 
 $('.order'+$this->id).on('click', function () {
-      var index = select.selectedIndex; // 选中索引
-  var value = select.options[index].value;
+  var index = document.getElementById("form-control-select"+$this->id).selectedIndex; // 选中索引
+  var value = document.getElementById("form-control-select"+$this->id).options[index].value;
     location.href = '/admin/order/$this->id/'+value;
     
 });
