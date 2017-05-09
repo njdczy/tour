@@ -30,7 +30,7 @@ class OrderController extends Controller
     {
         return Admin::grid(Order::class, function (Grid $grid) use ($tlid) {
 
-            $grid->model()->where('triplist_id','=',$tlid);
+            $grid->model()->where('triplist_id','=',$tlid)->orderBy('id', 'desc');
             $grid->column('trip','活动名称')->display(function () {
                 return $this->trip_name."(". $this->triplist_name .")";
             });

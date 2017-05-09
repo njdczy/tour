@@ -28,6 +28,11 @@ class FromController extends Controller
             $trip_list->date_start = Carbon::parse($trip_list->date_start);;
             $trip_list->date_end = Carbon::parse($trip_list->date_end);;
         });
+
+        $user = User::find(session('user_id'));
+        if (!empty($user)){
+            return view("wechat.form.form", compact('trip', 'trip_lists','user'));
+        }
         return view("wechat.form.form", compact('trip', 'trip_lists'));
     }
 

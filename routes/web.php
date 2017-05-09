@@ -58,3 +58,4 @@ Route::group([
 
 //Route::get('/mobile', 'MobileController@index')->name('mobile');
 Route::get('/oauth', 'OauthController@index')->name('oauth');
+Route::post('/notify', 'NotifyController@index')->name('notify');
