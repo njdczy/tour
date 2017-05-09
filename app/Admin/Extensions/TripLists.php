@@ -49,10 +49,10 @@ SCRIPT;
             $select_html .=  '<option value="'.$key.'">'.$val.'</option>';
         }
         return '
-<a data-toggle="modal" data-target="#triplists-modal" data-id="{$this->id}"><i class="fa fa-eye"></i></a>
+<a data-toggle="modal" data-target="#triplists-modal' .$this->id .'" data-id=' .$this->id .'><i class="fa fa-eye"></i></a>
 
 
-<div class="modal fade" id="triplists-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+<div class="modal fade" id="triplists-modal' .$this->id .'" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
