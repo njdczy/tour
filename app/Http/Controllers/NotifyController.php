@@ -17,11 +17,11 @@ class NotifyController extends Controller
     {
         $wechat = app('wechat');
         $response = $wechat->payment->handleNotify(function($notify, $successful){
-            Log::info('out_trade_no.', ['out_trade_no' => $notify->out_trade_no]);
+            Log::debug('out_trade_no.', ['out_trade_no' => $notify->out_trade_no]);
             // 使用通知里的 "微信支付订单号" 或者 "商户订单号" 去自己的数据库找到订单
             $arr = preg_split("/([a-zA-Z0-9]+)/", $notify->out_trade_no, 0, PREG_SPLIT_NO_EMPTY | PREG_SPLIT_DELIM_CAPTURE);
             $order = Order::find($arr[0]);
-            Log::info('order.', $arr);
+            Log::debug('order.', $arr);
             if (!$order) { // 如果订单不存在
                 return 'Order not exist.'; // 告诉微信，我已经处理完了，订单没找到，别再通知我了
             }

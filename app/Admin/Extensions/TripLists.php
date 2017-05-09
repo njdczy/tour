@@ -18,18 +18,18 @@ class TripLists
     {
         return <<<SCRIPT
         
-         var select = document.getElementById("form-control-select");
+         var select = document.getElementById("form-control-select"+$this->id);
        
        
          
-$('.edit').on('click', function () {
+$('.edit'+$this->id).on('click', function () {
   var index = select.selectedIndex; // 选中索引
   var value = select.options[index].value;
    location.href = '/admin/triplists/$this->id/'+value+'/edit';
     
 });
 
-$('.order').on('click', function () {
+$('.order'+$this->id).on('click', function () {
       var index = select.selectedIndex; // 选中索引
   var value = select.options[index].value;
     location.href = '/admin/order/$this->id/'+value;
@@ -60,14 +60,14 @@ SCRIPT;
                     <span aria-hidden="true">&times;</span>
                     <span class="sr-only">Close</span>
                 </button>
-                <h4 class="modal-title" id="myModalLabel">' . trans("admin::lang.filter") .'</h4>
+                <h4 class="modal-title" id="myModalLabel' .$this->id .'">' . trans("admin::lang.filter") .'</h4>
             </div>
                 
                     <div class="modal-body">
                         <div class="form">
 
                               <div class="form-group">
-            <select class="form-control-select" style="width: 100%;" id="form-control-select">
+            <select class="form-control-select' .$this->id .'" style="width: 100%;" id="form-control-select' .$this->id .'">
                     '. $select_html .'
             </select>
                              </div>
@@ -76,8 +76,8 @@ SCRIPT;
                     </div>
                     <div class="modal-footer">
                   
-                        <button type="edit" class="btn btn-primary edit pull-left" >修改信息</button>
-                        <button type="order" class="btn btn-primary order ">查看订单</button>
+                        <button type="edit" class="btn btn-primary edit' .$this->id .' pull-left" >修改信息</button>
+                        <button type="order" class="btn btn-primary order' .$this->id .' ">查看订单</button>
 
                     </div>
               
