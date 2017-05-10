@@ -19,7 +19,7 @@
         </div>
         <div class="weui-cell cells">
             <div class="weui-cell__hd">
-                <label class="weui-label">身高 <span> *</span></label>
+                <label class="weui-label">身高（cm） <span> *</span></label>
             </div>
             <div class="weui-cell__bd">
                 <input class="weui-input" type="text" placeholder="身高" value="" name="inputHeight[]">

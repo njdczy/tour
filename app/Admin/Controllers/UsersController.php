@@ -57,7 +57,7 @@ class UsersController extends Controller
             $grid->column('child_base', '小朋友基本信息')->display(function () {
                 $child = Child::where('is_default', 1)->where('user_id', '=', $this->id)->first();
                 if ($child) {
-                    $sex = isset($child->card)?check::getSex($child->card) == 1 ? '男' : '女' :'未知';
+                    $sex = isset($child->card)?check::getSex($child->card) == 1 ? '女' : '男' :'未知';
                     $age = '';
                     if ($child->card) {
                         $birth = check::getDate($child->card);
@@ -65,7 +65,7 @@ class UsersController extends Controller
                     }
 
                     return "<p> ".$child->name."（".$sex." ，" .$age . "岁）</p>
-                            <p>$child->height m/$child->weight kg</p>
+                            <p>$child->height cm/$child->weight kg</p>
                             ";
                 }
             });
@@ -155,13 +155,9 @@ class check
 {
     public static function getSex($card)
     {
-        if (strlen($card) == 15) {
-            $sexNum = substr($card, 12, 3);
-        } else {
-            $sexNum = substr($card, 14, 3);
-        }
+        $sexInt = (int)substr($card, 16, 1);
 
-        return $sexNum % 2 == 0 ? 1 : 2;
+        return $sexInt % 2 == 0 ? 1 : 2;
     }
 
     public static function getDate($card)
