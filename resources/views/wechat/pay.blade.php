@@ -3,7 +3,7 @@
     <div class="weui-msg__icon-area"><i class="weui-icon-success weui-icon_msg"></i></div>
     <h2 class="weui-msg__title">信息提交成功</h2>
 </div>
-<button type="submit" class="weui-btn weui-btn_primary" onclick="callpay()">微信支付</button>
+<--!<button type="submit" class="weui-btn weui-btn_primary" onclick="callpay()">微信支付</button>-->
 <script type="text/javascript">
     {{--function callpay() {--}}
         {{--wx.chooseWXPay({--}}
