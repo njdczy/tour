@@ -61,6 +61,7 @@ class OrderController extends Controller
             $grid->filter(function ($filter) {
                 $filter->disableIdFilter();// 禁用id查询框
                 $filter->like('user_name', '下单人');
+                $filter->is('is_payed', '是否付款')->select(['1'=>'是','0'=>'否']);
             });
             $grid->disableCreation();
         });

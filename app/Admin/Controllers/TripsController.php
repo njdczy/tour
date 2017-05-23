@@ -2,6 +2,7 @@
 
 namespace App\Admin\Controllers;
 
+use App\Order;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -14,6 +15,7 @@ use App\Admin\Extensions\TripLists;
 use Encore\Admin\Controllers\ModelForm;
 
 use App\Trip;
+use App\TripList;
 
 use QrCode;
 class TripsController extends Controller
@@ -46,6 +48,17 @@ class TripsController extends Controller
                         ->generate(url("/form/".$this->id))
                 )
                 .'"/>';
+            });
+            $grid->column('list', '最近期数信息')->display(function () {
+                $trip_lists = TripList::where('trip_id', '=', $this->id)->take(5)->get();
+                $html = "";
+                foreach ($trip_lists as $key => $list) {
+                    $payed_count = Order::where('triplist_id', '=', $list->id)->where("is_payed","=",1)->count();
+                    $unpay_count = Order::where('triplist_id', '=', $list->id)->where("is_payed","=",0)->count();
+                    $html .= "<p>".$list->times.": <a href='/admin/order/$this->id/$list->id?is_payed=1'>已付款</a>".
+                        $payed_count ."<a href='/admin/order/$this->id/$list->id?is_payed=0'>下单未付款</a>" . $unpay_count . "</p>";
+                }
+                return $html;
             });
             $grid->price('活动单价')->editable();
             $grid->price_bed('床位单价')->editable();

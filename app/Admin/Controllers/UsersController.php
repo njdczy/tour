@@ -83,9 +83,9 @@ class UsersController extends Controller
                             <p><span>住址:</span>$this->address</p>                          
                             ";
             });
-            $grid->column('last_trip', '最近一次活动')->display(function () {
+            $grid->column('last_trip', '最近消费一次活动')->display(function () {
 
-                $latest_order = Order::where('user_id','=',$this->id)->latest()
+                $latest_order = Order::where('user_id','=',$this->id)->where('is_payed','=',1)->latest()
                     ->first();
                 if ($latest_order) {
                     return "                                               
