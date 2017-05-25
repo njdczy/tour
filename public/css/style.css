@@ -51,11 +51,11 @@
 span{
 	color: #DA2824;
 }
-.nums{
+.nums,.parent-nums{
 	color: black;
 	display: none;
 }
-.nums span{
+.nums span,.parent-nums span{
 	color: black;
 }
 .weui-cells__title{
@@ -68,11 +68,11 @@ span{
 .weui-cell__bd p{
 	text-align: left;
 }
-.Btns{
+.Btns,.parent-btns{
 	margin: 3% 4% 5% 0;
 	text-align:right;
 }
-.reduce{
+.reduce,.parent-reduce{
 	display: none;
 }
 /*uploder style*/

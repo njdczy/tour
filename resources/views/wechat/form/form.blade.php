@@ -38,9 +38,26 @@
                 <a href="javascript:;" class="weui-btn weui-btn_mini weui-btn_primary more">+</a>
                 <a href="javascript:;" class="weui-btn weui-btn_mini weui-btn_primary reduce">-</a>
             </div>
-            <div class="weui-cell cells">
-                占床
-            </div>
+           <div class="weui-cells weui-cells_checkbox">
+                    <label class="weui-cell weui-check__label" for="occupy">
+                        <div class="weui-cell__hd">
+                            <input type="checkbox" class="weui-check" name="occupy" id="occupy">
+                            <i class="weui-icon-checked"></i>
+                        </div>
+                        <div class="weui-cell__bd">
+                            <p>占床</p>
+                        </div>
+                    </label>                    
+                    <label class="weui-cell weui-check__label" for="not-occupy">
+                        <div class="weui-cell__hd">
+                            <input type="checkbox" class="weui-check" name="not-occupy" id="not-occupy" >
+                            <i class="weui-icon-checked"></i>
+                        </div>
+                        <div class="weui-cell__bd">
+                            <p>不占床</p>
+                        </div>
+                    </label>                    
+                </div>
             <div class="page__bd page__bd_spacing subBtn" style="display: block;">
                 <a id="submit"  class="weui-btn weui-btn_primary">提交</a>
             </div>
@@ -90,6 +107,7 @@
                 progress[this.index].className='progress on';
             }
         }
+        // 孩子信息功能
         var _index = 1;
         function createEles(i){
             var html = $('.adds').html();
@@ -121,9 +139,43 @@
                 $('.nums span').eq(i).html(i+1)
             })
         });
-    var warn = $(".weui-toptips_warn");
-    if (warn.css("display") == 'block') {
-        warn.fadeOut(3000);
-    }
+        // 父母信息功能
+        var num = 1
+        function createParents(i){
+            var parentsHtml = $('.parent-add').html();
+            var parents = document.createElement('section');
+            parents.className = 'parent-add';
+            parents.innerHTML = parentsHtml;
+            $(parents).insertBefore($(".parent-btns"));
+           
+        };
+        $('.parent-more').on('click',function(){
+            num++;      
+            createParents(num);
+            $('.parent-reduce').css('display','inline-block');
+            if(num >= 1){
+                $('.parent-nums').css('display','inline-block');            
+                $('.parent-nums span').each(function(i){
+                    $('.parent-nums span').eq(i).html(i+1)
+                })
+            }       
+        });
+        $('.parent-reduce').on('click',function(){
+            num--;
+            var pars_adds = $('.parent-add');
+            pars_adds.eq(num).remove();
+            console.log($('.parent-add').eq(num));
+            if(num == 1){
+                $('.parent-reduce').css('display','none');
+                $('.parent-nums').css('display','none');
+            }
+            $('.parent-nums span').each(function(i){
+                $('.parent-nums span').eq(i).html(i+1)
+            })
+        });
+        var warn = $(".weui-toptips_warn");
+        if (warn.css("display") == 'block') {
+            warn.fadeOut(3000);
+        }
 </script>
 </html>
