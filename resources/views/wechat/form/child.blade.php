@@ -78,14 +78,6 @@
             <input class="weui-input" type="text" placeholder="体重（kg）" value="" name="inputWeight[]">
         </div>
     </div>
-{{--    <div class="weui-cell cells">
-        <div class="weui-cell__hd">
-            <label class="weui-label">所在学校 <span> *</span></label>
-        </div>
-        <div class="weui-cell__bd">
-            <input class="weui-input" type="text" placeholder="所在学校" value="" name="inputSchool[]">
-        </div>
-    </div>--}}
     <div class="weui-cell cells"></div>
    
 @endif

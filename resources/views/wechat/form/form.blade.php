@@ -28,6 +28,8 @@
     <form method="post" action="/form/{{ $trip->id }}" name="person">
         @include('wechat.form.time')
         @include('wechat.form.parent')
+
+
         <div class="box">
             <div class="adds">
                 @include('wechat.form.child')
@@ -36,8 +38,11 @@
                 <a href="javascript:;" class="weui-btn weui-btn_mini weui-btn_primary more">+</a>
                 <a href="javascript:;" class="weui-btn weui-btn_mini weui-btn_primary reduce">-</a>
             </div>
+            <div class="weui-cell cells">
+                占床
+            </div>
             <div class="page__bd page__bd_spacing subBtn" style="display: block;">
-                <button type="submit" class="weui-btn weui-btn_primary">提交</button>
+                <a id="submit"  class="weui-btn weui-btn_primary">提交</a>
             </div>
         </div>
         {{ csrf_field() }}
@@ -47,6 +52,17 @@
 </body>
 
 <script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
+<script>
+    $('#submit').on('click',function(){
+        var inputParent = $("input[name=inputParent]").val();
+        var inputTel = $("input[name=inputTel]").val();
+        var inputChild = new Array();
+        var els =document.getElementsByName("inputChild[]");
+        for (var i = 0, j = els.length; i < j; i++){
+            alert(els[i].value);
+        }
+    });
+</script>
 <script type="text/javascript">
         var next = document.getElementsByClassName('next');
         var box = document.getElementsByClassName('box');

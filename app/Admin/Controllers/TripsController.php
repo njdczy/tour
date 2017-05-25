@@ -43,7 +43,7 @@ class TripsController extends Controller
                 return  '<img src="data:image/png;base64,'
                 .base64_encode(
                     QrCode::format("png")
-                        ->merge(asset('images/logo/logo.png'), .28,true)
+                        ->merge(asset('images/logo/logo'.Admin::user()->id.'.png'), .28,true)
                         ->errorCorrection('H')
                         ->size(150)
                         ->generate(url("/form/".$this->id))
@@ -67,9 +67,8 @@ class TripsController extends Controller
                 }
                 return $html;
             });
-            $grid->price('活动单价')->editable();
-            $grid->price_bed('床位单价')->editable();
-            $grid->price_bed('床位单价')->editable();
+//            $grid->price('活动单价')->editable();
+//            $grid->price_bed('床位单价')->editable();
             //表格扩展
             $grid->actions(function ($actions) {
 
@@ -91,9 +90,9 @@ class TripsController extends Controller
         return Admin::form(Trip::class, function (Form $form) {
 
             $form->text('name', '活动名称');
-            $form->text('price', '活动单价');
+            //$form->text('price', '活动单价');
             $form->hidden('admin_id')->value(Admin::user()->id);
-            $form->text('price_bed', '床位单价');
+            //$form->text('price_bed', '床位单价');
         });
     }
 
