@@ -34,6 +34,7 @@ class NotifyController extends Controller
             if ($successful) {
                 // 不是已经支付状态则修改为已经支付状态
                 $order->is_payed = 1;
+                $order->pay_type = 1;
                 $order->save(); // 保存订单
             } else { // 用户支付失败
 

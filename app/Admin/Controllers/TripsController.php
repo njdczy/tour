@@ -16,7 +16,7 @@ use Encore\Admin\Controllers\ModelForm;
 
 use App\Trip;
 use App\TripList;
-
+use Carbon\Carbon;
 use QrCode;
 class TripsController extends Controller
 {
@@ -37,6 +37,7 @@ class TripsController extends Controller
     protected function grid()
     {
         return Admin::grid(Trip::class, function (Grid $grid) {
+            $grid->model()->where('admin_id','=',Admin::user()->id);
             $grid->name('活动名称');
             $grid->column('qrcode','报名二维码')->display(function () {
                 return  '<img src="data:image/png;base64,'
@@ -51,16 +52,23 @@ class TripsController extends Controller
             });
             $grid->column('list', '最近期数信息')->display(function () {
                 $trip_lists = TripList::where('trip_id', '=', $this->id)->take(5)->get();
+                $trip_lists = $trip_lists->each(function ($trip_list, $key) {
+
+                    $trip_list->date_start = Carbon::parse($trip_list->date_start)->format('m-d ');
+                    $trip_list->date_end = Carbon::parse($trip_list->date_end)->format('m-d ');
+                });
                 $html = "";
                 foreach ($trip_lists as $key => $list) {
                     $payed_count = Order::where('triplist_id', '=', $list->id)->where("is_payed","=",1)->count();
                     $unpay_count = Order::where('triplist_id', '=', $list->id)->where("is_payed","=",0)->count();
-                    $html .= "<p>".$list->times.": <a href='/admin/order/$this->id/$list->id?is_payed=1'>已付款</a>".
+                    $html .= "<p>".$list->times. "（".$list->date_start ." -- ".$list->date_end ." ）".":
+                        <a href='/admin/order/$this->id/$list->id?is_payed=1'>已付款</a>".
                         $payed_count ."<a href='/admin/order/$this->id/$list->id?is_payed=0'>下单未付款</a>" . $unpay_count . "</p>";
                 }
                 return $html;
             });
             $grid->price('活动单价')->editable();
+            $grid->price_bed('床位单价')->editable();
             $grid->price_bed('床位单价')->editable();
             //表格扩展
             $grid->actions(function ($actions) {
@@ -84,6 +92,7 @@ class TripsController extends Controller
 
             $form->text('name', '活动名称');
             $form->text('price', '活动单价');
+            $form->hidden('admin_id')->value(Admin::user()->id);
             $form->text('price_bed', '床位单价');
         });
     }

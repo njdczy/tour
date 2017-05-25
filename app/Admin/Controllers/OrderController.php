@@ -15,6 +15,7 @@ use App\Order;
 
 class OrderController extends Controller
 {
+    use ModelForm;
     public function index($tid,$tlid)
     {
         return Admin::content(function (Content $content) use ($tlid) {
@@ -36,6 +37,7 @@ class OrderController extends Controller
             });
             $grid->user_name('下单人');
             $grid->created_at('下单时间');
+            $grid->mobile('手机号码');
             $grid->child_info('订单详细信息')->display(function () {
                 $child_arr = unserialize($this->child_info);
                 $html = '';
@@ -47,16 +49,22 @@ class OrderController extends Controller
                     }
                 }
                 return $html;
-            });;
+            });
+            $grid->pay_type('付款方式')->display(function ($pay_type) {
+                switch ($pay_type){
+                    case 1 : return '微信';
+                    case 2 : return '线下支付';
+                    default : return '';
+                }
+            });
             $grid->is_payed('是否付款')->display(function ($is_payed) {
                 return $is_payed ? '是': '否';
             });
-            $grid->total('应付/实付')->display(function () {
-
-                return $this->need_total . '/' . $this->total . ($this->is_bed ? '(占床)': '');
-            });;
+            $grid->need_total('应付');
+            $grid->total('实付')->editable();
+            $grid->pay_to_who('收款人')->editable();
             $grid->enjoin('特殊嘱咐');
-
+            $grid->remark('备注')->editable();
             $grid->disableExport();
             $grid->filter(function ($filter) {
                 $filter->disableIdFilter();// 禁用id查询框
@@ -66,4 +74,25 @@ class OrderController extends Controller
             $grid->disableCreation();
         });
     }
+
+    public function edit($id)
+    {
+        return Admin::content(function (Content $content) use ($id) {
+            $content->header('订单详情');
+            $content->description('操作');
+
+            $content->body($this->form()->edit($id));
+        });
+    }
+    protected function form()
+    {
+        return Admin::form(Order::class, function (Form $form) {
+
+            $form->text('is_payed', '是否付款');
+            $form->text('total', '实付金额');
+            $form->text('pay_to_who', '收款人');
+        });
+    }
+
+
 }
