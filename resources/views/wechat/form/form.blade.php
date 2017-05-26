@@ -37,27 +37,7 @@
             <div class="Btns">
                 <a href="javascript:;" class="weui-btn weui-btn_mini weui-btn_primary more">+</a>
                 <a href="javascript:;" class="weui-btn weui-btn_mini weui-btn_primary reduce">-</a>
-            </div>
-           <div class="weui-cells weui-cells_checkbox">
-                    <label class="weui-cell weui-check__label" for="occupy">
-                        <div class="weui-cell__hd">
-                            <input type="checkbox" class="weui-check" name="occupy" id="occupy">
-                            <i class="weui-icon-checked"></i>
-                        </div>
-                        <div class="weui-cell__bd">
-                            <p>占床</p>
-                        </div>
-                    </label>                    
-                    <label class="weui-cell weui-check__label" for="not-occupy">
-                        <div class="weui-cell__hd">
-                            <input type="checkbox" class="weui-check" name="not-occupy" id="not-occupy" >
-                            <i class="weui-icon-checked"></i>
-                        </div>
-                        <div class="weui-cell__bd">
-                            <p>不占床</p>
-                        </div>
-                    </label>                    
-                </div>
+            </div>          
             <div class="page__bd page__bd_spacing subBtn" style="display: block;">
                 <a id="submit"  class="weui-btn weui-btn_primary">提交</a>
             </div>

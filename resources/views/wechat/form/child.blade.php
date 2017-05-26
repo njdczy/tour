@@ -41,7 +41,6 @@
                 <input class="weui-input" type="text" placeholder="所在学校" value="" name="inputSchool[]">
             </div>
         </div>
-        <div class="weui-cell cells"></div>
         <input type="hidden" value="{{$child->id}}" name="child_id[]">
     @endforeach
 @else
@@ -78,6 +77,25 @@
             <input class="weui-input" type="text" placeholder="体重（kg）" value="" name="inputWeight[]">
         </div>
     </div>
-    <div class="weui-cell cells"></div>
-   
+    <div class="weui-cells weui-cells_radio">
+        <label class="weui-cell weui-check__label">
+            <div class="weui-cell__bd">
+                <p>占床</p>
+            </div>
+            <div class="weui-cell__ft">
+                <input type="radio" class="weui-check" >
+                <span class="weui-icon-checked"></span>
+            </div>
+        </label>
+        <label class="weui-cell weui-check__label">
+
+            <div class="weui-cell__bd">
+                <p>不占床</p>
+            </div>
+            <div class="weui-cell__ft">
+                <input type="radio" class="weui-check">
+                <span class="weui-icon-checked"></span>
+            </div>
+        </label>
+    </div>
 @endif
