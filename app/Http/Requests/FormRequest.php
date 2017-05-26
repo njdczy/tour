@@ -29,8 +29,8 @@ class FormRequest extends Ori
             'inputHeight.*' => 'required',
             'inputWeight.*' => 'required',
 //            'inputSchool.*' => 'required',
-            'inputParent' => 'required',
-            'inputTel'    => 'required',
+            'inputParent.*' => 'required',
+            'inputTel.*'    => 'required',
 //            'inputAddress' => 'required',
         ];
     }
@@ -45,8 +45,8 @@ class FormRequest extends Ori
 //            'inputSchool.*.required'  => '请输入学校名称',
 
 
-            'inputParent.required'  => '请家长姓名',
-            'inputTel.required'  => '请输入手机',
+            'inputParent.*.required'  => '请家长姓名',
+            'inputTel.*.required'  => '请输入手机',
 //            'inputAdress.required'  => '请输入家庭住址',
 
         ];

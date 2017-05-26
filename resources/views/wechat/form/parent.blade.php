@@ -7,7 +7,7 @@
             </div>
             <div class="weui-cell__bd">
                 <input class="weui-input" type="text"  placeholder="家长姓名"
-                       value="{{ old('inputParent') }}" name="inputParent">
+                       name="inputParent[]">
             </div>
         </div>
         <div class="weui-cell cells">
@@ -16,7 +16,7 @@
             </div>
             <div class="weui-cell__bd">
                 <input class="weui-input" type="text" placeholder="家长手机"
-                       value="{{ old('inputTel') }}" name="inputTel">
+                        name="inputTel[]">
             </div>
         </div>
         <div class="weui-cell cells"></div>

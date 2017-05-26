@@ -18,7 +18,13 @@
             </label>
         @endforeach
     </div>
+    <input type="hidden" value="" name="triplist_id"  >
     <div class="page__bd page__bd_spacing next next_one">
          <a href="javascript:;" class="weui-btn weui-btn_primary">下一步</a>
-    </div>  
+    </div>
+    <script>
+        $('input[name=Date]').on('click',function(){
+            $('input[name=triplist_id]').val($(this).val());
+        });
+    </script>
 </div>

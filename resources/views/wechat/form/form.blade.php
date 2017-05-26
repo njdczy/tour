@@ -18,30 +18,58 @@
         <li class="step_one on">
             <i></i>
         </li>
+        @if($trip->need_parcent)
         <li class="progress">
             <i></i>
         </li>
+        @endif
         <li class="progress">
             <i></i>
         </li>
     </ul>
     <form method="post" action="/form/{{ $trip->id }}" name="person">
-        @include('wechat.form.time')
-        @include('wechat.form.parent')
 
+        @include('wechat.form.time')
+
+        @if($trip->need_parcent)
+            @include('wechat.form.parent')
+        @endif
 
         <div class="box">
             <div class="adds">
                 @include('wechat.form.child')
             </div>
+
             <div class="Btns">
                 <a href="javascript:;" class="weui-btn weui-btn_mini weui-btn_primary more">+</a>
                 <a href="javascript:;" class="weui-btn weui-btn_mini weui-btn_primary reduce">-</a>
-            </div>          
+            </div>
+            <div class="weui-cells weui-cells_radio">
+                <label class="weui-cell weui-check__label" id="is_bed">
+                    <div class="weui-cell__bd">
+                        <p>占床</p>
+                    </div>
+                    <div class="weui-cell__ft">
+                        <input type="radio" checked class="weui-check" name="bed" >
+                        <span class="weui-icon-checked"></span>
+                    </div>
+                </label>
+                <label class="weui-cell weui-check__label" id="is_not_bed">
+
+                    <div class="weui-cell__bd">
+                        <p>不占床</p>
+                    </div>
+                    <div class="weui-cell__ft">
+                        <input type="radio" class="weui-check" name="bed" >
+                        <span class="weui-icon-checked"></span>
+                    </div>
+                </label>
+            </div>
             <div class="page__bd page__bd_spacing subBtn" style="display: block;">
-                <a id="submit"  class="weui-btn weui-btn_primary">提交</a>
+                <button id="submit" type="submit"  class="weui-btn weui-btn_primary">提交</button>
             </div>
         </div>
+        <input type="hidden" value="1" name="is_bed"  >
         {{ csrf_field() }}
     </form>
 </div>
@@ -50,14 +78,11 @@
 
 <script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
 <script>
-    $('#submit').on('click',function(){
-        var inputParent = $("input[name=inputParent]").val();
-        var inputTel = $("input[name=inputTel]").val();
-        var inputChild = new Array();
-        var els =document.getElementsByName("inputChild[]");
-        for (var i = 0, j = els.length; i < j; i++){
-            alert(els[i].value);
-        }
+    $('#is_bed').on('click',function(){
+        $('input[name=is_bed]').val(1);
+    });
+    $('#is_not_bed').on('click',function(){
+        $('input[name=is_bed]').val(0);
     });
 </script>
 <script type="text/javascript">

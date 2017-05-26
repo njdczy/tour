@@ -23,17 +23,20 @@ class FromController extends Controller
         $trip_lists = TripList::where('trip_id', $trip->id)
             ->whereDate('date_start', '>', date('Y-m-d'))
             ->get();
-        $trip_lists = $trip_lists->each(function ($trip_list, $key) {
-
-            $trip_list->date_start = Carbon::parse($trip_list->date_start);;
-            $trip_list->date_end = Carbon::parse($trip_list->date_end);;
+        $trip_lists = $trip_lists->each(function ($trip_list, $key) use ($trip) {
+            if($trip_list->parcent_price){
+                $trip->need_parcent = 1;
+            }else{
+                $trip->need_parcent = 0;
+            }
+            $trip_list->date_start = Carbon::parse($trip_list->date_start);
+            $trip_list->date_end = Carbon::parse($trip_list->date_end);
         });
-
         $user = User::find(session('user_id'));
         if (!empty($user)){
             return view("wechat.form.form", compact('trip', 'trip_lists','user'));
         }
-        return view("wechat.form.form", compact('trip', 'trip_lists'));
+        return view("wechat.form.form", compact('trip', 'trip_lists','user'));
     }
 
 
@@ -47,7 +50,6 @@ class FromController extends Controller
         $inputSchools = $request->input('inputSchool.*');
 
         $is_bed = $request->input('is_bed',0);
-
         foreach ($inputChilds as $key => $value) {
             $child = Child::firstOrNew(['card' => $inputIDs[$key]]);
 
@@ -63,13 +65,16 @@ class FromController extends Controller
         }
 
         //user
-        $user = User::findOrFail(session('user_id'));
-        $user->name = $user->real_name = $request->input('inputParent');
-        $user->phone_number = $request->input('inputTel');
-        $user->address = $request->input('inputAddress');
-        $user->email = $request->input('inputEmail');
-        $user->save();
 
+        $inputParents = $request->input('inputParent.*');
+        $inputTels = $request->input('inputTel.*');
+        foreach ($inputParents as $key => $value) {
+            $user = Child::firstOrNew(['user_id' => session('user_id') , 'phone_number' => $inputTels[$key]]);
+            $user->name = $user->real_name = $inputParents[$key];
+            $user->phone_number = $inputTels[$key];
+            $user->user_id = session('user_id');
+            $user->save();
+        }
         //order
         $trip_list = TripList::findOrFail($request->input('Date'));
         $trip = Trip::findOrFail($trip_list->trip_id);
