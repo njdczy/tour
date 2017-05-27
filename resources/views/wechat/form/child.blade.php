@@ -77,5 +77,5 @@
             <input class="weui-input" type="text" placeholder="体重（kg）" value="" name="inputWeight[]">
         </div>
     </div>
-
+    <div class="weui-cell cells"></div>
 @endif

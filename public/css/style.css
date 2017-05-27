@@ -141,3 +141,11 @@ article p{
 	text-align: inherit;
 	padding: 10px 15px;
 }
+.weui-cells_radio{
+	padding: 0 12px 0 0;
+	background: #f8f8f8;
+	margin-top: -19px;
+}
+.weui-cells_radio:after{
+	left: 15px;
+}
