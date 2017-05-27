@@ -18,11 +18,9 @@
         <li class="step_one on">
             <i></i>
         </li>
-        @if($trip->need_parcent)
         <li class="progress">
             <i></i>
         </li>
-        @endif
         <li class="progress">
             <i></i>
         </li>
@@ -31,9 +29,9 @@
 
         @include('wechat.form.time')
 
-        @if($trip->need_parcent)
+
             @include('wechat.form.parent')
-        @endif
+
 
         <div class="box">
             <div class="adds">
@@ -44,6 +42,8 @@
                 <a href="javascript:;" class="weui-btn weui-btn_mini weui-btn_primary more">+</a>
                 <a href="javascript:;" class="weui-btn weui-btn_mini weui-btn_primary reduce">-</a>
             </div>
+
+            @if($trip->need_bed)
             <div class="weui-cells weui-cells_radio">
                 <label class="weui-cell weui-check__label" id="is_bed">
                     <div class="weui-cell__bd">
@@ -65,11 +65,12 @@
                     </div>
                 </label>
             </div>
+            @endif
             <div class="page__bd page__bd_spacing subBtn" style="display: block;">
                 <button id="submit" type="submit"  class="weui-btn weui-btn_primary">提交</button>
             </div>
         </div>
-        <input type="hidden" value="1" name="is_bed"  >
+        <input type="hidden" value="0" name="is_bed"  >
         {{ csrf_field() }}
     </form>
 </div>

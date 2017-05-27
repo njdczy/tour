@@ -37,7 +37,7 @@ class TripsController extends Controller
     protected function grid()
     {
         return Admin::grid(Trip::class, function (Grid $grid) {
-            $grid->model()->where('admin_id','=',Admin::user()->id);
+            $grid->model()->where('admin_id','=',Admin::user()->id)->orderBy('id','desc');
             $grid->name('活动名称');
             $grid->column('qrcode','报名二维码')->display(function () {
                 return  '<img src="data:image/png;base64,'

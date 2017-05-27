@@ -12,6 +12,7 @@ use App\Trip;
 use App\TripList;
 use App\User;
 use App\Child;
+use App\Parcent;
 use App\Order;
 
 class FromController extends Controller
@@ -24,10 +25,15 @@ class FromController extends Controller
             ->whereDate('date_start', '>', date('Y-m-d'))
             ->get();
         $trip_lists = $trip_lists->each(function ($trip_list, $key) use ($trip) {
-            if($trip_list->parcent_price){
+            if($trip_list->parcent_price != 0){
                 $trip->need_parcent = 1;
             }else{
                 $trip->need_parcent = 0;
+            }
+            if($trip_list->child_price_bed != 0){
+                $trip->need_bed = 1;
+            }else{
+                $trip->need_bed = 0;
             }
             $trip_list->date_start = Carbon::parse($trip_list->date_start);
             $trip_list->date_end = Carbon::parse($trip_list->date_end);
@@ -63,22 +69,32 @@ class FromController extends Controller
             $child_arr[$key] =  $child->toArray();
             $child_arr[$key]['is_bed'] = $is_bed;
         }
-
-        //user
-
+        $order = new Order;
+        //parcent
         $inputParents = $request->input('inputParent.*');
         $inputTels = $request->input('inputTel.*');
         foreach ($inputParents as $key => $value) {
-            $user = Child::firstOrNew(['user_id' => session('user_id') , 'phone_number' => $inputTels[$key]]);
-            $user->name = $user->real_name = $inputParents[$key];
-            $user->phone_number = $inputTels[$key];
-            $user->user_id = session('user_id');
-            $user->save();
+            if ($key == 0) {
+                //user
+                $user = User::find(session('user_id'));
+                if (!$user->real_name){
+                    $user->name = $user->real_name = $inputParents[$key];
+                    $user->phone_number = $inputTels[$key];
+                    $user->save();
+                }
+                $order->mobile =  $inputTels[$key];
+            }
+            $parcent = Parcent::firstOrNew(['user_id' => session('user_id') , 'phone_number' => $inputTels[$key]]);
+            $parcent->name = $inputParents[$key];
+            $parcent->phone_number = $inputTels[$key];
+            $parcent->user_id = session('user_id');
+            $parcent->save();
+            $parcent_arr[$key] =  $parcent->toArray();
         }
         //order
         $trip_list = TripList::findOrFail($request->input('Date'));
         $trip = Trip::findOrFail($trip_list->trip_id);
-        $order = new Order;
+
 
 
         $order->enjoin =  $request->input('inputEnjoin');
@@ -93,16 +109,21 @@ class FromController extends Controller
         $order->user_name = $user->name;
 
         $order->child_info = serialize($child_arr);
+        $order->parcent_info = serialize($parcent_arr);
+        $child_num = count($inputIDs);
+        $parcent_num = count($inputParents);
         if ($is_bed) {
-            $unit_price = $trip->price + $trip->price_bed;
+            $price = ((int)$trip_list->parcent_price * $parcent_num) + ((int)$trip_list->child_price_bed * $child_num);
         }else {
-            $unit_price = $trip->price;
+
+            $price = ((int)$trip_list->parcent_price * $parcent_num) + ((int)$trip_list->child_price * $child_num);
         }
-        $order->need_total = $unit_price * count($inputIDs);
+        $order->need_total = $price;
         $order->total = 0.00;
 
         $order->save();
         session(['order_id' => $order->id]);
+        return view("wechat.pay");
         return redirect('/pay');
     }
 

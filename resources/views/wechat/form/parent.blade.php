@@ -21,10 +21,12 @@
         </div>
         <div class="weui-cell cells"></div>
     </section>
+    @if($trip->need_parcent)
     <div class="parent-btns">
         <a href="javascript:;" class="weui-btn weui-btn_mini weui-btn_primary parent-more">+</a>
         <a href="javascript:;" class="weui-btn weui-btn_mini weui-btn_primary parent-reduce">-</a>
     </div>
+    @endif
     <div class="weui-cell cells">
         <div class="weui-cell__hd">
             <label class="weui-label">特殊嘱咐</label>
