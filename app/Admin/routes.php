@@ -36,5 +36,7 @@ Route::group([
 
     Route::get('/order/{tid}/{tlid}', 'OrderController@index');
     Route::get('/order/{tid}/{tlid}/{id}/edit', 'OrderController@edit');
+    Route::put('/order/{tid}/{tlid}/{id}', 'OrderController@update');
+    Route::post('/order/{tid}/{tlid}/{id}', 'OrderController@store');
 
 });

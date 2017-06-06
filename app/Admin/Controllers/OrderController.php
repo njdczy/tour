@@ -57,9 +57,11 @@ class OrderController extends Controller
                     default : return '';
                 }
             });
-            $grid->is_payed('是否付款')->display(function ($is_payed) {
-                return $is_payed ? '是': '否';
-            });
+//            $grid->is_payed('是否付款')->display(function ($is_payed) {
+//                return $is_payed ? '是': '否';
+//            });
+            $grid->is_payed('是否付款')->editable('select', [1 => '是', 0=> '否']);
+
             $grid->need_total('应付');
             $grid->total('实付')->editable();
             $grid->pay_to_who('收款人')->editable();
@@ -75,23 +77,33 @@ class OrderController extends Controller
         });
     }
 
-    public function edit($id)
+    public function edit($tid,$tlid,$id)
     {
         return Admin::content(function (Content $content) use ($id) {
             $content->header('订单详情');
             $content->description('操作');
-
             $content->body($this->form()->edit($id));
         });
     }
     protected function form()
     {
         return Admin::form(Order::class, function (Form $form) {
-
-            $form->text('is_payed', '是否付款');
+            $form->radio('is_payed', '是否付款')->options([1 => '是', 0=> '否'])->default(0);
+            //$form->text('is_payed', '是否付款');
             $form->text('total', '实付金额');
             $form->text('pay_to_who', '收款人');
+            $form->text('remark', '备注');
         });
+    }
+
+    public function store($tid,$tlid,$id)
+    {
+        return $this->form()->store($id);
+    }
+
+    public function update($tid,$tlid,$id)
+    {
+        return $this->form()->update($id);
     }
 
 
